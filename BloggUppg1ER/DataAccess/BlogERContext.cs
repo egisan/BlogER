@@ -21,8 +21,6 @@ namespace BloggUppg1ER.Models
             {
                 entity.HasKey(e => e.CategoryId);
 
-                entity.Property(e => e.Description).HasMaxLength(200);
-
                 entity.Property(e => e.Name).HasMaxLength(200);
             });
 

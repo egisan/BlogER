@@ -26,12 +26,13 @@ namespace BloggUppg1ER.ViewModels
         public DateTime? PostedOn { get; set; }
 
         // Properties below belongs to Category class
-        [Required]
+        //  [Required]
+
+        public int CategoryID { get; set; }
+
         [Display(Name = "Kategori namn")]
-        // public string CategoryName { get; set; }
+        // public SelectList Categories { get; set; }
         public List<SelectListItem> Categories { get; set; }
 
-        //[Display(Name = "Beskrivning")]
-        //public string Description { get; set; }
     }
 }

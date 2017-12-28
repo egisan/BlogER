@@ -1,11 +1,14 @@
 use BlogER;
 
+ALTER TABLE [dbo].[Categories]
+DROP COLUMN [Description];
+
 CREATE TABLE [dbo].[Categories] ( 
     [CategoryId] INT IDENTITY (1, 1) NOT NULL, 
     [Name] NVARCHAR (200) NULL, 
-    [Description] NVARCHAR (200) NULL, 
     CONSTRAINT [PK_dbo.Categories] PRIMARY KEY CLUSTERED ([CategoryId] ASC) 
 ); 
+
 
 CREATE TABLE [dbo].[Posts] ( 
     [PostId] INT IDENTITY (1, 1) NOT NULL, 

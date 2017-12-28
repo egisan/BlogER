@@ -12,8 +12,8 @@ namespace BloggUppg1ER.Models
 
         public int CategoryId { get; set; }
         public string Name { get; set; }
-        // public string Description { get; set; }
 
+        // Navigtion prop
         public virtual ICollection<Posts> Posts { get; set; }
     }
 }

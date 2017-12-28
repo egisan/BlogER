@@ -8,6 +8,7 @@ using System.Net;
 using BloggUppg1ER.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections;
 
 namespace BloggUppg1ER.Controllers
 {
@@ -66,13 +67,23 @@ namespace BloggUppg1ER.Controllers
             var myModel = new PostViewModel();
             myModel.PostedOn = DateTime.Now;
 
+            //myModel.Categories = new List<SelectListItem>
+            //{
+            //    new SelectListItem { Value = "1", Text = "First field"},
+            //    new SelectListItem { Value = "2", Text = "Second field"},
+            //    new SelectListItem { Value = "3", Text = "3rd field"},
+            //    new SelectListItem { Value = "4", Text = "4th field"}
+            //};
+
             myModel.Categories = _context.Categories
                                          .Select(c => new SelectListItem()
-                                                             {
-                                                                 Value = c.CategoryId.ToString(),
-                                                                 Text = c.Name
-                                                             })
+                                         {
+                                             Value = c.CategoryId.ToString(),
+                                             Text = c.Name
+                                         })
                                          .ToList();
+
+            // myModel.Categories = new SelectList(_context.Categories, "CategoryId", "Name");
             return View(myModel);
         }
 
@@ -97,12 +108,7 @@ namespace BloggUppg1ER.Controllers
                     Title = postVM.Title,
                     Content = postVM.Content,
                     PostedOn = postVM.PostedOn,
-                    CategoryId = Convert.ToInt32(postVM.Categories.Where(c => c.Selected == true).Select(c => c.Value))
-                    //Category = new Categories()
-                    //{
-                    //    Name = postVM.Categories.S
-                    //    //  Description = postVM.Description
-                    //}
+                    CategoryId = postVM.CategoryID
                 };
 
                 // *** CHECK if the FK CategoryId is automatically generated in Post table after saving to DB
