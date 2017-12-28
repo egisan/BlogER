@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BloggUppg1ER.Models.Posts>
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table>
+
+        <tr>
+            <th>Post title</th>
+            <th>Posted on</th>
+            <th></th>
+        </tr>
+
+        @foreach (var post in Model)
+        {
+            <tr>
+                <td>@post.Title</td>
+                <td>@post.PostedOn</td>
+            
+                @*Equivalent to Html.ActionLink()*@
+                <td><a asp-controller="Home" asp-action="ShowPostDetails" asp-route-id="@post.PostId">Show details</a> </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
