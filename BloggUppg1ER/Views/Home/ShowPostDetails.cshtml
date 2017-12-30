@@ -1,26 +1,17 @@
 ﻿@model BloggUppg1ER.Models.Posts
 
+
+
 @{
-    Layout = null;
+    ViewBag.Title = "Post details";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ShowPostDetails</title>
-</head>
-<body>
-    <h2>@Model.Title</h2>
-    <br />
-    <h4>Category: @Model.Category.Name</h4>
-    <h5>Posted On: @Model.PostedOn</h5>
-    <br />
-    <p>@Model.Content</p>
+<h2>@Model.Title</h2>
+<br />
+<h4>Category: @Model.Category.Name</h4>
+<h5>Posted On: @Model.PostedOn</h5>
+<br />
+<p>@Model.Content</p>
 
-    <a asp-controller="Home" asp-action="ShowAllPosts">Show all posts</a>
-
-
-</body>
-</html>
+<a asp-controller="Home" asp-action="ShowAllPosts">Show all posts</a>

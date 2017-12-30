@@ -32,7 +32,7 @@ namespace BloggUppg1ER.ViewModels
         // from the view Create!
         public int CategoryID { get; set; }
 
-        [Required(ErrorMessage = "välj kategori namn")]
+        [Required(ErrorMessage = "Välj kategori namn")]
         [Display(Name = "Kategori namn")]
 
         // public SelectList Categories { get; set; }
