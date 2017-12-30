@@ -23,12 +23,45 @@ namespace BloggUppg1ER.Controllers
         }
 
         // GET: Overview of all posts (Index)
-        public IActionResult ShowAllPosts()
-        {
-            var posts = _context.Posts.ToList();
 
-            return View(posts);
+        // In this Action I need to enbed the Search function for both Title and Category!
+        public IActionResult ShowAllPosts(string titleSearch, string categorySearch)
+        {
+            //ViewBag.sortTerm = String.IsNullOrEmpty(sortTerm) ? "" : sortTerm;
+            //ViewBag.titleSearch = String.IsNullOrEmpty(titleSearch) ? "" : titleSearch;
+            //ViewBag.categorySearch = String.IsNullOrEmpty(categorySearch) ? "" : categorySearch;
+
+            string filterHeader = "";
+            IQueryable<Posts> posts = _context.Posts.Include("Category").OrderByDescending(c => c.PostedOn) as IQueryable<Posts>;
+
+            // Filtering by Title
+            if (!String.IsNullOrEmpty(titleSearch))
+            {
+                posts = posts.Where(c => c.Title.ToLower().Contains(titleSearch.ToLower())).OrderByDescending(c => c.PostedOn);
+                filterHeader = String.Format(@"Filtered posts on title ""{0}""", titleSearch);
+            }
+
+            // Filtering by Category
+            if (!String.IsNullOrEmpty(categorySearch))
+            {
+                posts = posts.Where(c => c.Category.Name.ToLower().Contains(categorySearch.ToLower())).OrderByDescending(c => c.PostedOn);
+                if (filterHeader != "")
+                {
+                    filterHeader = filterHeader + String.Format(@" and on category ""{0}""", categorySearch);
+                }
+                else
+                {
+                    filterHeader = String.Format(@"Filtered posts on category ""{0}""", categorySearch);
+                }
+            }
+
+            ViewBag.Title = filterHeader;
+
+            return View(posts.ToList());
         }
+
+
+
 
         // GET: Show details of a single post (details)
         public IActionResult ShowPostDetails(int? id)
@@ -45,17 +78,6 @@ namespace BloggUppg1ER.Controllers
 
             }
 
-            // Create a VM to combine the post & category info
-            //var postVM = new PostViewModel()
-            //{
-            //    Id = postModel.PostId,
-            //    Title = postModel.Title,
-            //    Content = postModel.Content,
-            //    PostedOn = postModel.PostedOn,
-            //    CategoryName = postModel.Category.Name,
-            //    //  Description = postModel.Category.Description
-            //};
-
             return View(postModel);
         }
 
@@ -66,14 +88,6 @@ namespace BloggUppg1ER.Controllers
         {
             var myModel = new PostViewModel();
             myModel.PostedOn = DateTime.Now;
-
-            //myModel.Categories = new List<SelectListItem>
-            //{
-            //    new SelectListItem { Value = "1", Text = "First field"},
-            //    new SelectListItem { Value = "2", Text = "Second field"},
-            //    new SelectListItem { Value = "3", Text = "3rd field"},
-            //    new SelectListItem { Value = "4", Text = "4th field"}
-            //};
 
             myModel.Categories = _context.Categories
                                          .Select(c => new SelectListItem()

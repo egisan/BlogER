@@ -8,6 +8,7 @@ namespace BloggUppg1ER.Models
     {
         public int PostId { get; set; }
 
+        [Required(ErrorMessage = "Ange rubrik namn")]
         [StringLength(50)]
         [Display(Name = "Rubrik")]
         public string Title { get; set; }
@@ -16,8 +17,8 @@ namespace BloggUppg1ER.Models
         [Display(Name = "Inlägg")]
         public string Content { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Ange datum")]
+        [DataType(DataType.DateTime)]
         [Display(Name = "Datum")]
         [DisplayFormat(DataFormatString = "{0:yyyy-mm-dd HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime? PostedOn { get; set; }
@@ -25,7 +26,7 @@ namespace BloggUppg1ER.Models
         // This is a FK
         public int CategoryId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "välj kategori namn")]
         [Display(Name = "Kategori")]
         public virtual Categories Category { get; set; }
     }

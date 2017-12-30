@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Content\css\" />
-    <Folder Include="wwwroot\Content\Images\" />
-    <Folder Include="wwwroot\Content\js\" />
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\Images\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
   <ItemGroup>

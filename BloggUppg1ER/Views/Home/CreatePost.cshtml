@@ -8,10 +8,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
+    <title>Create new post</title>
 </head>
 <body>
     <form asp-controller="Home" asp-action="CreatePost" method="post">
+        
+        <div asp-validation-summary="All"></div>
 
         @*<input asp-for="Id" type="hidden" />*@
 
